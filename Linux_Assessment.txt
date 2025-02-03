@@ -1,0 +1,57 @@
+1a. Create 3 groups and 15 users
+
+# Create groups
+sudo groupadd group1
+sudo groupadd group2
+sudo groupadd group3
+
+# Create users and assign to groups
+for i in {1..5}; do sudo useradd -m -G group1 user$i; done
+for i in {6..10}; do sudo useradd -m -G group2 user$i; done
+for i in {11..15}; do sudo useradd -m -G group3 user$i; done
+
+b. Verify users in groups
+
+getent group group1
+getent group group2
+getent group group3
+
+c. Set permissions and demonstrate restricted access
+
+# Create folders for each group
+sudo mkdir /group1_folder /group2_folder /group3_folder
+
+# Set ownership and permissions
+sudo chown :group1 /group1_folder
+sudo chown :group2 /group2_folder
+sudo chown :group3 /group3_folder
+
+# Restrict access so only group members can read/write
+sudo chmod 770 /group1_folder
+sudo chmod 770 /group2_folder
+sudo chmod 770 /group3_folder
+Test Restricted Access
+
+Try accessing /group1_folder as user8  (from group2), and it should be denied:
+
+su - user8
+cd /group1_folder
+touch test.txt  # Should give a permission error
+
+2. Bash Script to Filter “packets” from /var/log
+Create a script file:
+
+nano filter_packets.sh
+
+Add the following content:
+
+
+grep -i "packets" /var/log/* 2>/dev/null
+Save and exit, then give it permission to execute:
+
+chmod +x filter_packets.sh
+Run the script:
+
+./filter_packets.sh
+
+Thank you.
