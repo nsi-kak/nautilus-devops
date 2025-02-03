@@ -76,4 +76,4 @@ DevOps Engineer and Site Reliability Engineer (SRE) roles have overlapping respo
 While DevOps Engineers focus on automating the development pipeline and improving efficiency,
 SRE Engineers concentrate on system reliability, availability, and performance. Both roles complement each other in modern cloud and software-driven organizations.
 
-Thank you
+Thank you.
